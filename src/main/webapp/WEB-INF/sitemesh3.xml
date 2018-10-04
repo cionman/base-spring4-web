@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+	<mapping path="/*" decorator="/WEB-INF/views/include/default.jsp"/>
+	<!-- Exclude path from decoration. -->
+	<mapping path="**/ajax/*" exclue="true"/>
+</sitemesh>
+

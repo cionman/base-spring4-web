@@ -1,0 +1,9 @@
+target/
+build/
+.settings/
+.classpath
+.project
+.gradle
+.svn
+.idea/
+base-spring4-web.iml

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="jdbcTypeForNull" value="NULL" />
+        <setting name="defaultFetchSize" value="100" />
+        <setting name="cacheEnabled"              value="true"/>
+        <setting name="lazyLoadingEnabled"        value="false"/>
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <setting name="useColumnLabel"            value="true"/>
+        <setting name="useGeneratedKeys"          value="false"/>
+        <setting name="defaultExecutorType"       value="SIMPLE"/>
+        <setting name="defaultStatementTimeout"   value="25000"/>
+        <!-- 언더바로 구분된 칼럼명을 소문자 낙타표기법의 프로티명에 맵핑해준다. -->
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+    </settings>
+
+    <typeAliases>
+        <typeAlias type="java.util.HashMap" alias="hashMap"/>
+        <package name="com.base.model"/>
+    </typeAliases>
+</configuration>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.base.mappers.mariadb.ExampleMapper">
+    <select id="findAllUserCount" resultType="Integer">
+      SELECT
+        COUNT(1)
+      FROM
+        USER
+    </select>
+    <select id="findAllUser" resultType="UserVO">
+      SELECT
+        USER_SEQNO
+        , USER_NAME
+        , PHONE_NO
+        , EMAIL
+      FROM
+        USER
+    </select>
+</mapper>
