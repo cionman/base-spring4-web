@@ -5,6 +5,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
+/**
+ * 스프링 제공 BCryptPasswordEncoder를 살짝 변형해서 사용하기 위한 클래스
+ */
 public class CustomPasswordEncoder extends BCryptPasswordEncoder {
 
     private final String CUSTOM_SALT = "ABC!2ASD3QW";

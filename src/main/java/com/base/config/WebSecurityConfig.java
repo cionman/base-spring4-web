@@ -32,16 +32,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsService userDetailsService;
 
-    @Qualifier("mariaDBDataSource")
-    DataSource mariadbDatasource;
-
-
+    /**
+     * spirng secuirty 설정
+     * @param web
+     * @throws Exception
+     */
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/resources/**");
     }
 
 
+    /**
+     * spring security 설정
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
@@ -60,7 +66,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();
     }
 
-
+    /**
+     * spring security 인증을 위한 UserDetailService적용 및 PasswordEncoder
+     * @param auth
+     * @throws Exception
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
@@ -76,7 +86,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new PropertySourcesPlaceholderConfigurer();
     }
     /**
-     * System 변수 인식
+     * System 환경 변수 인식
      * @return
      */
     @Bean
