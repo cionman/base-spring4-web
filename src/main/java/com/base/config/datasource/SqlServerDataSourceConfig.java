@@ -19,8 +19,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 
 @Configuration
-@PropertySource("classpath:properties/database.properties")
 @EnableTransactionManagement
+@PropertySource("classpath:properties/database.properties")
 @MapperScan(basePackages = {"com.base.mappers.sqlserver"}
             , sqlSessionFactoryRef = "sqlServerSqlSessionFactoryBean")
 public class SqlServerDataSourceConfig extends BaseDataSourceConfig {
@@ -43,6 +43,9 @@ public class SqlServerDataSourceConfig extends BaseDataSourceConfig {
 
     @Bean
     public SqlSessionFactoryBean sqlServerSqlSessionFactoryBean(){
+
+        DataSource dataSource = "dev".equals(profile) ? dataSourceLog(sqlServerDataSource()) : sqlServerDataSource();
+
         SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSourceLog(sqlServerDataSource()));
         sessionFactoryBean.setConfigLocation(
