@@ -11,7 +11,7 @@
                 <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>
             </span>
         </c:if>
-        <c:url var="loginUrl" value="/auth/login" />
+        <c:url var="loginUrl" value="${prop['/auth/login']}" />
         <form:form action="${loginUrl}">
             <table>
                 <tr>

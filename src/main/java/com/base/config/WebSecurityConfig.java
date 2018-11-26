@@ -1,9 +1,8 @@
 package com.base.config;
 
-import com.base.common.component.CustomPasswordEncoder;
-import org.mybatis.spring.SqlSessionFactoryBean;
+import com.base.common.component.auth.CustomPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -13,13 +12,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
-import javax.sql.DataSource;
-import java.security.SecureRandom;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -31,6 +24,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserDetailsService userDetailsService;
+
+    @Autowired
+    AuthenticationFailureHandler customAuthenticationFailureHandler;
+
+    @Value("${auth.loginUrl}")
+    private String LOGIN_URL;
+
+    @Value("${auth.logoutUrl}")
+    private String LOGOUT_URL;
+
+    @Value("${auth.successUrl}")
+    private String SUCCESS_URL;
 
     /**
      * spirng secuirty 설정
@@ -52,14 +57,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
         http.formLogin()
-                .loginPage("/auth/login")
-                .defaultSuccessUrl("/example")
+                .loginPage(LOGIN_URL)
+                .defaultSuccessUrl(SUCCESS_URL)
                 .usernameParameter("loginId")
                 .passwordParameter("pwd")
+                //.failureHandler(customAuthenticationFailureHandler) 인증 실
                 .permitAll();
 
         http.logout()
-                .logoutUrl("/auth/logout")
+                .logoutUrl(LOGOUT_URL)
                 .permitAll();
 
         http.authorizeRequests()
