@@ -61,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl(SUCCESS_URL)
                 .usernameParameter("loginId")
                 .passwordParameter("pwd")
-                //.failureHandler(customAuthenticationFailureHandler) 인증 실
+                .failureHandler(customAuthenticationFailureHandler)
                 .permitAll();
 
         http.logout()
