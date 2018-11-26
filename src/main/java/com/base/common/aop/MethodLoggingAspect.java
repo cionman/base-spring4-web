@@ -26,7 +26,7 @@ public class MethodLoggingAspect {
         try{
             return jp.proceed();
         }catch (Exception e){
-            logUtil.error(projectName, e);
+            logUtil.error(jp.getSignature().getName(), e);
             e.printStackTrace();
             throw e;
         }
