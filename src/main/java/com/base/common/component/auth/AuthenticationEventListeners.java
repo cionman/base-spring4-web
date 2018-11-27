@@ -21,12 +21,15 @@ public class AuthenticationEventListeners {
 
     @Autowired
     private HttpServletRequest request;
+
     /**
      * BadCredential Exception 발생시 이벤트 발생
      * @param event
      */
     @EventListener
     public void handleBadCredentials(AuthenticationFailureBadCredentialsEvent event){
-        logUtil.info(MessageFormat.format("[로그인 실패][{0}]", request.getRemoteAddr()));
+        logUtil.info(MessageFormat.format("[로그인 실패][{0}][{1}]", request.getRemoteAddr(), event.getException().getMessage()));
     }
+
+
 }
