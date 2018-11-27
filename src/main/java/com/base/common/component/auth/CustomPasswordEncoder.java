@@ -1,4 +1,4 @@
-package com.base.common.component;
+package com.base.common.component.auth;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
