@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.text.MessageFormat;
+
 @Aspect
 @Component
 public class MethodLoggingAspect {
@@ -26,7 +28,7 @@ public class MethodLoggingAspect {
         try{
             return jp.proceed();
         }catch (Exception e){
-            logUtil.error(jp.getSignature().getName(), e);
+            logUtil.error(MessageFormat.format("{0}:{1}:{2}",projectName, projectVersion, jp.getSignature().getName()) , e);
             e.printStackTrace();
             throw e;
         }
