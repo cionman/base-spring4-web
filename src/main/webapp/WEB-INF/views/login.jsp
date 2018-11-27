@@ -5,14 +5,13 @@
 </head>
 <body>
     <div id="wrapper">
-        <h3>로그인 폼</h3>
+        <h3>로그인 폼!!!!</h3>
         <c:if test="${param.containsKey('error')}">
             <span style="color:red;">
                 <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>
             </span>
         </c:if>
-        <c:url var="loginUrl" value="${prop['/auth/login']}" />
-        <form:form action="${loginUrl}">
+        <form:form>
             <table>
                 <tr>
                     <td><label for="loginId">사용자명</label></td>
