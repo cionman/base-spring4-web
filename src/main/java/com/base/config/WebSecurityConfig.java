@@ -58,9 +58,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         super.configure(http);
         http.formLogin()
                 .loginPage(LOGIN_URL)
-                .defaultSuccessUrl(SUCCESS_URL)
                 .usernameParameter("loginId")
                 .passwordParameter("pwd")
+                .successForwardUrl(SUCCESS_URL) // 인증 성공 후 이동
                 .failureHandler(customAuthenticationFailureHandler)
                 .permitAll();
 
