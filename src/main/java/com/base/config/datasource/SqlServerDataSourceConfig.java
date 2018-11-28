@@ -1,10 +1,6 @@
 package com.base.config.datasource;
 
 import com.base.common.base.BaseDataSourceConfig;
-import net.sf.log4jdbc.Log4jdbcProxyDataSource;
-import net.sf.log4jdbc.tools.Log4JdbcCustomFormatter;
-import net.sf.log4jdbc.tools.LoggingType;
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
