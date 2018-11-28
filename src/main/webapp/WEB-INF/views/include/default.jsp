@@ -16,7 +16,8 @@
 </head>
 <body>
 
-	<h2>sitemesh 영역</h2>
+	<h2>sitemesh 영역 ${prop['auth.logoutUrl']}</h2>
+	<a href='<c:url value="${prop['auth.logoutUrl']}"/>'>로그아웃</a>
 	<sitemesh:write property='body'/>
 	<script>
 
