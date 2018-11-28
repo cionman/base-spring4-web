@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage(LOGIN_URL)
                 .usernameParameter("loginId")
                 .passwordParameter("pwd")
-                .successForwardUrl(SUCCESS_URL)// 인증 성공 후 이동
+                .defaultSuccessUrl(SUCCESS_URL, true)// 인증 성공 후 이동
                 //.failureHandler(customAuthenticationFailureHandler) //인증 실패시 커스텀하게 사용시
                 .permitAll();
 
