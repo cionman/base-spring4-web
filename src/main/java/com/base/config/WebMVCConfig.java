@@ -1,19 +1,24 @@
 package com.base.config;
 
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.http.MediaType;
 import org.springframework.web.accept.ContentNegotiationManager;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -21,10 +26,7 @@ import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Configuration
 @EnableWebMvc
@@ -99,4 +101,17 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
         resolver.setDefaultViews(viewList);
         return resolver;
     }
+
+    /**
+     * message 사용 설정
+     * @return
+     */
+    @Bean
+    public MessageSource messageSource(){
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        messageSource.setBasenames("messages/messages"); // 클래스 패스 상에 있는 프로퍼티 파일 이름을 확장자를 제외하고 지정
+        messageSource.setDefaultEncoding("UTF-8");
+        return messageSource;
+    }
+
 }
