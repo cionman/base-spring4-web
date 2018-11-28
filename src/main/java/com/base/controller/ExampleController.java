@@ -2,11 +2,15 @@ package com.base.controller;
 
 import com.base.form.AccountCreateForm;
 import com.base.form.ExampleForm;
+import com.base.service.auth.AuthUserDetail;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import sun.plugin.liveconnect.SecurityContextHelper;
 
 import javax.validation.Valid;
 
@@ -16,6 +20,18 @@ public class ExampleController {
 
     @RequestMapping("")
     public String example(){
+
+        //  인증 정보에 접근 하는 방법
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loginId = null;
+        if(authentication.getPrincipal() instanceof AuthUserDetail){
+            AuthUserDetail userDetail = AuthUserDetail.class.cast(authentication.getPrincipal());
+            loginId = userDetail.getAccount().getLoginId();
+
+            System.out.println("현재 로그인 Id는 " + loginId);
+        }
+
+
         return "example/example";
     }
 

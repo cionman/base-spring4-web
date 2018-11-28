@@ -15,15 +15,22 @@
 	<sitemesh:write property='head'/>
 </head>
 <body>
-	<c:set var="logoutUrl">
-		<spring:eval expression="@prop['auth.logoutUrl']"/>
-	</c:set>
+	<sec:authorize access="isAuthenticated()">
+		<!-- 인증이 된 경우 에만 나타남 -->
+		<h3><sec:authentication property="principal.account.userName"/> 님 반갑습니다.</h3>
+		<!-- a태그를 이용한 get 방식으로는 로그아웃 절차가 진행되지 않는다. -->
+		<c:set var="logoutUrl">
+			<spring:eval expression="@prop['auth.logoutUrl']"/>
+		</c:set>
+		<form action="<c:url value='${logoutUrl}'/>" method="post">
+			<sec:csrfInput/>
+			<button>logout</button>
+		</form>
+
+
+	</sec:authorize>
+
 	<h2>sitemesh 영역${logoutUrl}</h2>
-	<!-- a태그를 이용한 get 방식으로는 로그아웃 절차가 진행되지 않는다. -->
-	<form action="<c:url value='${logoutUrl}'/>" method="post">
-		<sec:csrfInput/>
-		<button>logout</button>
-	</form>
 	<sitemesh:write property='body'/>
 	<script>
 
