@@ -15,7 +15,7 @@ import sun.plugin.liveconnect.SecurityContextHelper;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("example")
+@RequestMapping("/example")
 public class ExampleController {
 
     @RequestMapping("")

@@ -5,8 +5,11 @@
 </head>
 <body>
     <h1>example페이지</h1>
-    <li><a href='<c:url value="/example/exampleView.do"/>'>웹페이지 단순이동 </a></li>
-    <li><a href='<c:url value="/example/exampleInput.do"/>'>spring form 예제1 </a></li>
-    <li><a href='<c:url value="/example/exampleInput2.do"/>'>spring form 예제2 </a></li>
+    <ul>
+        <li><a href='${spring:mvcUrl("EC#exampleView").build()}'>웹페이지 단순이동 </a></li>
+        <li><a href='${spring:mvcUrl("EC#exampleInput").build()}'>spring form 예제1 </a></li>
+        <li><a href='${spring:mvcUrl("EC#exampleInput2").build()}'>spring form 예제2 </a></li>
+        <li><a href='${spring:mvcUrl("AC#profile").build()}'>profile</a></li>
+    </ul>
 </body>
 </html>
