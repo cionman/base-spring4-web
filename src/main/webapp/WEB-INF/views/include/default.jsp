@@ -15,9 +15,15 @@
 	<sitemesh:write property='head'/>
 </head>
 <body>
-
-	<h2>sitemesh 영역 ${prop['auth.logoutUrl']}</h2>
-	<a href='<c:url value="${prop['auth.logoutUrl']}"/>'>로그아웃</a>
+	<c:set var="logoutUrl">
+		<spring:eval expression="@prop['auth.logoutUrl']"/>
+	</c:set>
+	<h2>sitemesh 영역${logoutUrl}</h2>
+	<!-- a태그를 이용한 get 방식으로는 로그아웃 절차가 진행되지 않는다. -->
+	<form action="<c:url value='${logoutUrl}'/>" method="post">
+		<sec:csrfInput/>
+		<button>logout</button>
+	</form>
 	<sitemesh:write property='body'/>
 	<script>
 
