@@ -76,6 +76,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/example/exampleInput.do").hasAuthority("EXAM_USER") //hasRole이 되지 않는다. UserDetailsService 구현으로 Authorities가 동작하는듯
                 .anyRequest().authenticated();
+
+        http.exceptionHandling()
+                .accessDeniedPage("/WEB-INF/views/accessDeniedError.jsp");
     }
 
     /**
