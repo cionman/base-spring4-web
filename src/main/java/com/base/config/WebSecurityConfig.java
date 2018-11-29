@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler;
@@ -79,6 +80,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.exceptionHandling()
                 .accessDeniedPage("/WEB-INF/views/accessDeniedError.jsp");
+
+        http.sessionManagement()
+                .invalidSessionUrl("/auth/invalidSession")
+                //.sessionCreationPolicy(SessionCreationPolicy.STATELESS) // RestApI 사용시 Session 사용하지 않음 처리
+                .sessionFixation().newSession(); // 세션 고정공격 방지
+
     }
 
     /**

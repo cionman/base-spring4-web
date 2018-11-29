@@ -23,4 +23,9 @@ public class AuthController {
         return "profile";
     }
 
+    @RequestMapping
+    public String invalidSession(){
+        return "invalidSession";
+    }
+
 }
