@@ -16,6 +16,7 @@
         , USER_STATUS
         , RGST_DTM
         , UPDT_DTM
+        , ROLE
       FROM
         USER
       WHERE

@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
+        //super.configure(http);
         http.formLogin()
                 .loginPage(LOGIN_URL)
                 .usernameParameter("loginId")
@@ -74,6 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
 
         http.authorizeRequests()
+                .antMatchers("/example/exampleInput.do").hasAuthority("EXAM_USER") //hasRole이 되지 않는다. UserDetailsService 구현으로 Authorities가 동작하는듯
                 .anyRequest().authenticated();
     }
 
@@ -105,15 +106,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         PropertyPlaceholderConfigurer prop =  new PropertyPlaceholderConfigurer();
         prop.setSystemPropertiesModeName("SYSTEM_PROPERTIES_MODE_OVERRIDE");
         return prop;
-    }
-
-    @Bean
-    public AuthenticationFailureHandler authenticationFailureHandler() {
-        ExceptionMappingAuthenticationFailureHandler failureHandler = new ExceptionMappingAuthenticationFailureHandler();
-        Map<String, String> failureUrlMap = new HashMap<>();
-        failureUrlMap.put(InternalAuthenticationServiceException.class.getName(), "");
-        failureHandler.setExceptionMappings(failureUrlMap);
-        return failureHandler;
     }
 
 }

@@ -23,11 +23,13 @@ public class ExampleController {
         //  인증 정보에 접근 하는 방법
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String loginId = null;
+        String role = null;
         if(authentication.getPrincipal() instanceof AuthUserDetail){
             AuthUserDetail userDetail = AuthUserDetail.class.cast(authentication.getPrincipal());
             loginId = userDetail.getAccount().getLoginId();
-
+            role = userDetail.getAccount().getRole();
             System.out.println("현재 로그인 Id는 " + loginId);
+            System.out.println("현재 로그인 Role은" + role);
         }
 
 

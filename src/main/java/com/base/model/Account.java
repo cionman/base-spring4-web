@@ -11,6 +11,7 @@ public class Account {
     private String sex;
     private String birth;
     private int userStatus;
+    private String role;
     private String rgstDtm;
     private String updtDtm;
     private boolean enabled;
@@ -27,11 +28,20 @@ public class Account {
         sb.append(", sex='").append(sex).append('\'');
         sb.append(", birth='").append(birth).append('\'');
         sb.append(", userStatus=").append(userStatus);
+        sb.append(", role='").append(role).append('\'');
         sb.append(", rgstDtm='").append(rgstDtm).append('\'');
         sb.append(", updtDtm='").append(updtDtm).append('\'');
         sb.append(", enabled=").append(enabled);
         sb.append('}');
         return sb.toString();
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public int getUserSeqno() {
