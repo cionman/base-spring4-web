@@ -73,4 +73,14 @@ public class ExampleController {
         return "example/input2";
     }
 
+    @RequestMapping(value="/exampleInput2.do", method = RequestMethod.POST)
+    public String exampleInput2Post(
+            @Valid AccountCreateForm form
+            , BindingResult result){
+        if(result.hasErrors()){
+            return "example/input2";
+        }
+        return "example/output";
+    }
+
 }
