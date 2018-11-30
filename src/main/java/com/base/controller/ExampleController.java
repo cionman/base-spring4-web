@@ -2,7 +2,10 @@ package com.base.controller;
 
 import com.base.form.AccountCreateForm;
 import com.base.form.ExampleForm;
+import com.base.mappers.mariadb.ExampleMapper;
 import com.base.service.auth.AuthUserDetail;
+import com.base.service.example.ExampleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,9 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/example")
 public class ExampleController {
+
+    @Autowired
+    ExampleService exampleService;
 
     @RequestMapping("")
     public String example(){
@@ -39,6 +45,7 @@ public class ExampleController {
 
     @RequestMapping("/exampleView.do")
     public String exampleView(){
+        exampleService.findAllUser();
         return "example/exampleView";
     }
 

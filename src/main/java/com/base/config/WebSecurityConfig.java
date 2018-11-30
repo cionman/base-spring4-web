@@ -8,21 +8,29 @@ import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
 @EnableWebSecurity
 @EnableAspectJAutoProxy
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @PropertySource("classpath:properties/app.properties")
 @ComponentScan("com.base")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -85,7 +93,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidSessionUrl("/auth/invalidSession")
                 //.sessionCreationPolicy(SessionCreationPolicy.STATELESS) // RestApI 사용시 Session 사용하지 않음 처리
                 .sessionFixation().newSession(); // 세션 고정공격 방지
-
     }
 
     /**
