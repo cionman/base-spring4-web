@@ -16,6 +16,7 @@ import java.nio.file.AccessDeniedException;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.logout;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
@@ -42,4 +43,32 @@ public class ExampleControllerTest extends BasicControllerTest {
                 .andReturn();
 
     }
+
+
+    @WithMockUser(username = "test", roles="EXAM")
+    @Test
+    public void testExampleInputWithRightRoles() throws Exception {
+
+        mockMvc.perform(get("/example/exampleInput.do"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+
+    }
+
+    @WithMockUser(username = "test", roles="EXAM")
+    @Test
+    public void testPostExampleInput() throws Exception {
+
+        mockMvc.perform(post("/example/exampleInput.do")
+                        .param("text", "abcdefg")
+                        .with(csrf()))
+
+                .andDo(print())
+                .andExpect(view().name("example/output"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+    }
+
 }
