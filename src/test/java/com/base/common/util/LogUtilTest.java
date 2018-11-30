@@ -1,4 +1,4 @@
-package com.base;
+package com.base.common.util;
 
 import com.base.common.util.LogUtil;
 import com.base.config.WebSecurityConfig;

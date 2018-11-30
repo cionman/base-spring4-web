@@ -1,4 +1,4 @@
-package com.base;
+package com.base.common.component.auth;
 
 
 import com.base.common.component.auth.CustomPasswordEncoder;
