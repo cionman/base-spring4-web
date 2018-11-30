@@ -75,7 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
 
         http.authorizeRequests()
-                .antMatchers("/example/exampleInput.do").hasAuthority("EXAM_USER") //hasRole이 되지 않는다. UserDetailsService 구현으로 Authorities가 동작하는듯
+                .antMatchers("/example/exampleInput.do").hasRole("EXAM") // hasAuthority("ROLE_EXAM") == hasRole("EXAM") Role은 앞에 'ROLE_'서두가 빠진 것이 ROLE이 된다.
                 .anyRequest().authenticated();
 
         http.exceptionHandling()
