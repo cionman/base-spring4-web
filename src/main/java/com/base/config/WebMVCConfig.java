@@ -1,5 +1,7 @@
 package com.base.config;
 
+import com.base.common.interceptor.RequestLogInterceptor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -13,9 +15,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.resource.VersionResourceResolver;
 import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -35,6 +36,7 @@ import java.util.Map;
 public class WebMVCConfig extends WebMvcConfigurerAdapter {
 
 
+    @Value("${activatedProfile}") private String profile;
 
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
@@ -114,6 +116,14 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
         return messageSource;
     }
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/**") // 요청경로
+                .addResourceLocations("classpath:/static/") //실제 리소스 경로
+                .resourceChain(!"dev".equals(profile)) // real 프로필에만 캐시를 잡기 위함
+                .addResolver(new VersionResourceResolver()
+                        .addContentVersionStrategy("/**"));
 
 
+    }
 }

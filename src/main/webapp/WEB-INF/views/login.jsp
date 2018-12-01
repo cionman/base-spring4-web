@@ -27,6 +27,7 @@
                 </tr>
             </table>
         </form:form>
+        <img src='<c:url value="/static/image/test.jpg"/>'/>
     </div>
 </body>
 </html>
