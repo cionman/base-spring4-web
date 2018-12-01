@@ -106,23 +106,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .passwordEncoder(new CustomPasswordEncoder());
     }
 
-    /**
-     * properties 파일이 인식시키기위해 사용
-     * @return
-     */
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
-    /**
-     * System 환경 변수 인식
-     * @return
-     */
-    @Bean
-    public static PropertyPlaceholderConfigurer propertyConfigInDev() {
-        PropertyPlaceholderConfigurer prop =  new PropertyPlaceholderConfigurer();
-        prop.setSystemPropertiesModeName("SYSTEM_PROPERTIES_MODE_OVERRIDE");
-        return prop;
-    }
-
 }

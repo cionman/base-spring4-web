@@ -5,11 +5,13 @@ import com.base.common.interceptor.RequestLogInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -147,8 +149,29 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
 
     }
 
+
     @Bean
     HandlerExceptionResolver errorHandler () {
         return new CustomExceptionResolver(profile);
     }
+
+    /**
+     * properties 파일이 인식시키기위해 사용
+     * @return
+     */
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
+    /**
+     * System 환경 변수 인식
+     * @return
+     */
+    @Bean
+    public static PropertyPlaceholderConfigurer propertyConfigInDev() {
+        PropertyPlaceholderConfigurer prop =  new PropertyPlaceholderConfigurer();
+        prop.setSystemPropertiesModeName("SYSTEM_PROPERTIES_MODE_OVERRIDE");
+        return prop;
+    }
+
 }
