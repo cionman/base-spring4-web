@@ -1,6 +1,8 @@
 package com.base.config;
 
+import com.base.common.exceptionhandler.CustomExceptionResolver;
 import com.base.common.interceptor.RequestLogInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.MessageSource;
@@ -13,6 +15,9 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.http.MediaType;
 import org.springframework.web.accept.ContentNegotiationManager;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
@@ -37,6 +42,7 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
 
 
     @Value("${activatedProfile}") private String profile;
+
 
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
@@ -130,5 +136,19 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(new RequestLogInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/static/**");
+    }
+
+    @Bean
+    public MultipartResolver multipartResolver(){
+        CommonsMultipartResolver multipartResolver
+                = new CommonsMultipartResolver();
+        multipartResolver.setMaxUploadSize(5242880);
+        return multipartResolver;
+
+    }
+
+    @Bean
+    HandlerExceptionResolver errorHandler () {
+        return new CustomExceptionResolver(profile);
     }
 }

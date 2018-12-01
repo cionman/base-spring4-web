@@ -35,8 +35,12 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>com.base.config.WebMVCConfig</param-value>
 		</init-param>
-
 		<load-on-startup>1</load-on-startup>
+		<multipart-config>
+			<max-file-size>-1</max-file-size> <!-- 단일 파일 최대 크기 -->
+			<max-request-size>52428800</max-request-size> <!--멀티파트 요청 전체의 최대 바이트 크기-->
+			<file-size-threshold>1048576</file-size-threshold> <!-- 메모리에 있던 파일 내용을 임시 파일로 만드는 크기 -->
+		</multipart-config>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>app</servlet-name>

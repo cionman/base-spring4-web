@@ -1,6 +1,8 @@
 package com.base.form;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartResolver;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -21,7 +23,7 @@ public class AccountCreateForm implements Serializable {
     private String tel;
 
     @NotNull
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
 
     @NotNull
@@ -30,6 +32,36 @@ public class AccountCreateForm implements Serializable {
 
     private List<String> roles;
 
+    private MultipartFile imageFile;
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("AccountCreateForm{");
+        sb.append("name='").append(name).append('\'');
+        sb.append(", tel='").append(tel).append('\'');
+        sb.append(", dateOfBirth=").append(dateOfBirth);
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", roles=").append(roles);
+        sb.append(", imageFile=").append(imageFile);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
+    public MultipartFile getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(MultipartFile imageFile) {
+        this.imageFile = imageFile;
+    }
 
     public String getName() {
         return name;
