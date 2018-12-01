@@ -123,7 +123,12 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
                 .resourceChain(!"dev".equals(profile)) // real 프로필에만 캐시를 잡기 위함
                 .addResolver(new VersionResourceResolver()
                         .addContentVersionStrategy("/**"));
+    }
 
-
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new RequestLogInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns("/static/**");
     }
 }
