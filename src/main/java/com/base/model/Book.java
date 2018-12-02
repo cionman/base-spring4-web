@@ -1,13 +1,18 @@
 package com.base.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class Book implements Serializable {
-    private static final long serialVersionUID = 323355870119793038L;
+public class Book {
     private String bookId;
     private String name;
+
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate publishDate;
 
 
@@ -44,4 +49,5 @@ public class Book implements Serializable {
         sb.append('}');
         return sb.toString();
     }
+
 }

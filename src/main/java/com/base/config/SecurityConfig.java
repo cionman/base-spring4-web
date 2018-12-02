@@ -133,6 +133,7 @@ public class SecurityConfig {
         protected void configure(HttpSecurity http) throws Exception {
 
             http.antMatcher("/api/**");
+            http.csrf().disable();
 
             http.sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // RestApI 사용시 Session 사용하지 않음 처리

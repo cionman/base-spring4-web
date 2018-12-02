@@ -15,10 +15,12 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.accept.ContentNegotiationManager;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -178,4 +180,5 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(0, mappingJackson2HttpMessageConverter());
     }
+
 }
