@@ -40,7 +40,7 @@ public class WebSecurityBasicTest extends BasicControllerTest {
                     .password("pwd","qwer1234"))
                 .andDo(print())
                 .andExpect(status().isFound())
-                .andExpect(redirectedUrl("/example"))
+                .andExpect(redirectedUrl("/web/example"))
                 .andExpect(authenticated().withRoles("EXAM")); //Authority에서 ROLE_ 이제거된 것이 ROLE이 된다.
     }
 
@@ -51,7 +51,7 @@ public class WebSecurityBasicTest extends BasicControllerTest {
         mockMvc.perform(logout(LOGOUT_URL))
                 .andDo(print())
                 .andExpect(status().isFound())
-                .andExpect(redirectedUrl("/auth/login?logout"))
+                .andExpect(redirectedUrl("/web/auth/login?logout"))
                 .andExpect(unauthenticated());
     }
 

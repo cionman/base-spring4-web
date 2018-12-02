@@ -27,7 +27,7 @@ public class ExampleControllerTest extends BasicControllerTest {
     @Test
     public void testExampleInputWithWrongRoles() throws Exception {
 
-        mockMvc.perform(get("/example/exampleInput.do"))
+        mockMvc.perform(get("/web/example/exampleInput.do"))
                 .andDo(print())
                 .andExpect(status().isForbidden())
                 .andExpect(forwardedUrl("/WEB-INF/views/accessDeniedError.jsp"))
@@ -40,7 +40,7 @@ public class ExampleControllerTest extends BasicControllerTest {
     @Test
     public void testExampleInputWithRightRoles() throws Exception {
 
-        mockMvc.perform(get("/example/exampleInput.do"))
+        mockMvc.perform(get("/web/example/exampleInput.do"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();
@@ -51,7 +51,7 @@ public class ExampleControllerTest extends BasicControllerTest {
     @Test
     public void testPostExampleInput() throws Exception {
 
-        mockMvc.perform(post("/example/exampleInput.do")
+        mockMvc.perform(post("/web/example/exampleInput.do")
                         .param("text", "abcdefg")
                         .with(csrf()))
 
