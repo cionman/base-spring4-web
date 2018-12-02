@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
 
-@RequestMapping("/auth")
+@RequestMapping("/web/auth")
 @Controller
 public class AuthController {
 

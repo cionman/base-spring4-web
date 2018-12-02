@@ -8,7 +8,8 @@ public class WelcomeController {
 
     @RequestMapping("/")
     public String home(){
-        return "index";
+
+        return "redirect:/web/auth/login";
     }
 
 

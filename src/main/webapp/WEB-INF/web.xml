@@ -22,7 +22,7 @@
 	</context-param>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>com.base.config.WebSecurityConfig</param-value>
+		<param-value>com.base.config.SecurityConfig</param-value>
 	</context-param>
 	<servlet>
 		<servlet-name>app</servlet-name>
@@ -96,7 +96,7 @@
 			<include-prelude>/WEB-INF/views/include/taglib.jsp</include-prelude>
 		</jsp-property-group>
 	</jsp-config>
-	<error-page>
+	<!--<error-page>
 		<location>/WEB-INF/views/errors/error.jsp</location>
-	</error-page>
+	</error-page>-->
 </web-app>

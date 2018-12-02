@@ -1,7 +1,6 @@
 package com.base.common.util;
 
-import com.base.common.util.LogUtil;
-import com.base.config.WebSecurityConfig;
+import com.base.config.SecurityConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(
-        classes = {WebSecurityConfig.class}
+        classes = {SecurityConfig.class}
 )
 public class LogUtilTest {
 

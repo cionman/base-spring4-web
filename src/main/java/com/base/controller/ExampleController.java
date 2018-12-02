@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/example")
+@RequestMapping("/web/example")
 public class ExampleController {
 
     @Autowired
