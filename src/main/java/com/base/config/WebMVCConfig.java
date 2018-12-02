@@ -181,4 +181,8 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
         converters.add(0, mappingJackson2HttpMessageConverter());
     }
 
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/api/**");
+    }
 }
