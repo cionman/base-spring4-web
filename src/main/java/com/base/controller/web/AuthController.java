@@ -1,4 +1,4 @@
-package com.base.controller;
+package com.base.controller.web;
 
 import com.base.service.auth.AuthUserDetail;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

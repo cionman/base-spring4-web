@@ -3,5 +3,6 @@
 	<mapping path="/*" decorator="/WEB-INF/views/include/default.jsp"/>
 	<!-- Exclude path from decoration. -->
 	<mapping path="**/ajax/*" exclue="true"/>
+	<mapping path="/api/*" exclue="true"/>
 </sitemesh>
 

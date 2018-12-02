@@ -15,6 +15,9 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -45,19 +48,10 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
     @Value("${activatedProfile}") private String profile;
 
 
-    /**
-     * contentNegotiatingViewResolver 관련 설정 처리
-     * @param configurer
-     */
     @Override
-    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-        Map<String, MediaType> map = new HashMap<String, MediaType>();
-        map.put("json" ,MediaType.APPLICATION_JSON);
-        configurer.ignoreAcceptHeader(true).defaultContentType(
-                MediaType.TEXT_HTML).mediaTypes(map);
+    public void configureViewResolvers(ViewResolverRegistry registry) {
+        registry.viewResolver(internalResourceViewResolver());
     }
-
-
 
     @Bean
     public ViewResolver internalResourceViewResolver(){
@@ -69,17 +63,8 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
         return internalResolver;
     }
 
-    @Bean
-    public ViewResolver beanNameViewResolver(){
-        return new BeanNameViewResolver();
-    }
 
-    @Bean
-    public View mappingJackson2JsonView(){
-        MappingJackson2JsonView view = new MappingJackson2JsonView();
-        view.setPrefixJson(false);
-        return view;
-    }
+
 
     @Bean
     public PropertiesFactoryBean prop() throws IOException {
@@ -95,25 +80,6 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
         return bean;
     }
 
-    @Bean
-    public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager) {
-
-        ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
-        resolver.setContentNegotiationManager(manager);
-
-        List<ViewResolver> resolvers = new ArrayList<ViewResolver>();
-        resolvers.add(internalResourceViewResolver());
-        resolvers.add(beanNameViewResolver());
-
-        resolver.setViewResolvers(resolvers);
-        resolver.setOrder(1);
-
-        List<View> viewList = new ArrayList<View>();
-        viewList.add(mappingJackson2JsonView());
-
-        resolver.setDefaultViews(viewList);
-        return resolver;
-    }
 
     /**
      * message 사용 설정
@@ -165,7 +131,6 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
 
     }
 
-
     /**
      * HandlerExceptionResolver
      * @return
@@ -194,4 +159,23 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
         return prop;
     }
 
+
+    /**
+     * HttpMessageConverter Json 변환용 빈
+     * @return
+     */
+    @Bean
+    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter(){
+        return new MappingJackson2HttpMessageConverter(
+                Jackson2ObjectMapperBuilder.json().indentOutput(true).build());
+    }
+
+    /**
+     * HttpMessageConverter 적용, 현재는 Json 변환 컨버터만 적용
+     * @param converters
+     */
+    @Override
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(0, mappingJackson2HttpMessageConverter());
+    }
 }

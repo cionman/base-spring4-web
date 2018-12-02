@@ -1,4 +1,4 @@
-package com.base.controller;
+package com.base.controller.web;
 
 import com.base.form.AccountCreateForm;
 import com.base.form.ExampleForm;

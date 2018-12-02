@@ -113,21 +113,6 @@ public class SecurityConfig {
     @Configuration
     @Order(2)
     public static class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
-        @Autowired
-        UserDetailsService userDetailsService;
-
-        @Autowired
-        AuthenticationFailureHandler customAuthenticationFailureHandler;
-
-        @Value("${auth.loginUrl}")
-        private String LOGIN_URL;
-
-        @Value("${auth.logoutUrl}")
-        private String LOGOUT_URL;
-
-        @Value("${auth.successUrl}")
-        private String SUCCESS_URL;
-
         /**
          * spirng secuirty 설정
          * @param web
