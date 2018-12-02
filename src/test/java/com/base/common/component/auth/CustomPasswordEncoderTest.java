@@ -1,7 +1,6 @@
 package com.base.common.component.auth;
 
 
-import com.base.common.component.auth.CustomPasswordEncoder;
 import org.junit.Test;
 
 public class CustomPasswordEncoderTest {

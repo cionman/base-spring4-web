@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 
 import java.text.MessageFormat;
 
+/**
+ * Method ErrorLog를 남기는 AOP
+ */
 @Aspect
 @Component
 public class MethodLoggingAspect {

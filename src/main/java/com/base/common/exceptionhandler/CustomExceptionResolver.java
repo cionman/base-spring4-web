@@ -1,8 +1,5 @@
 package com.base.common.exceptionhandler;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,6 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+/**
+ * 에러 페이지를 띄우기전 처리
+ */
 public class CustomExceptionResolver implements HandlerExceptionResolver {
 
     private String profile;

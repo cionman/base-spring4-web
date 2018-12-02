@@ -3,7 +3,6 @@ package com.base.service.auth;
 import com.base.model.Account;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 

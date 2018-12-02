@@ -28,6 +28,9 @@ import java.util.Calendar;
 import java.util.List;
 
 
+/**
+ * 파일 업로드
+ */
 @Component
 public class UploadUtil {
 	@Value(value="${base.upload.path}")

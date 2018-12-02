@@ -2,7 +2,6 @@ package com.base.config;
 
 import com.base.common.exceptionhandler.CustomExceptionResolver;
 import com.base.common.interceptor.RequestLogInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
@@ -46,6 +45,10 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
     @Value("${activatedProfile}") private String profile;
 
 
+    /**
+     * contentNegotiatingViewResolver 관련 설정 처리
+     * @param configurer
+     */
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
         Map<String, MediaType> map = new HashMap<String, MediaType>();
@@ -62,7 +65,7 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
         internalResolver.setContentType("text/html; charset=UTF-8");
         internalResolver.setViewClass(JstlView.class);
         internalResolver.setOrder(0);
-        internalResolver.setExposedContextBeanNames("prop");
+        internalResolver.setExposedContextBeanNames("prop"); //JSP에서 prop 설정 사용가능하게 한다.
         return internalResolver;
     }
 
@@ -124,6 +127,10 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
         return messageSource;
     }
 
+    /**
+     * Static 리소스(image,css,js) 설정
+     * @param registry
+     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**") // 요청경로
@@ -133,6 +140,10 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
                         .addContentVersionStrategy("/**"));
     }
 
+    /**
+     * 인터셉터등록
+     * @param registry
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new RequestLogInterceptor())
@@ -140,6 +151,11 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
                 .excludePathPatterns("/static/**");
     }
 
+    /**
+     * 파일 업로드를 위한 MultipartResolver
+     * 파일 용량 제한을 실질적으로 이곳에서 수행하고 에러를 리턴시킨다.
+     * @return
+     */
     @Bean
     public MultipartResolver multipartResolver(){
         CommonsMultipartResolver multipartResolver
@@ -150,6 +166,10 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
     }
 
 
+    /**
+     * HandlerExceptionResolver
+     * @return
+     */
     @Bean
     HandlerExceptionResolver errorHandler () {
         return new CustomExceptionResolver(profile);

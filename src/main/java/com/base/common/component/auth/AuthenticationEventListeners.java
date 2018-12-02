@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import java.text.MessageFormat;
 
+/**
+ * 인증 이벤트를 캐치하는 리스너
+ */
 @Component
 public class AuthenticationEventListeners {
     @Autowired

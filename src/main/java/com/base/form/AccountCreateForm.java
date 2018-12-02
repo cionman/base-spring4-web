@@ -2,7 +2,6 @@ package com.base.form;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartResolver;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

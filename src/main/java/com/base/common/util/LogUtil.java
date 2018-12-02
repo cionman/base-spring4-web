@@ -7,6 +7,9 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ * 로그 유틸
+ */
 @Component
 public class LogUtil {
 

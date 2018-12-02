@@ -6,6 +6,10 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 세션 인터셉터 기본 틀 : 여러 Interceptor를 적용할 수 있는데 그중에 Request로그를 남기는 용도
+ *
+ */
 public class RequestLogInterceptor extends HandlerInterceptorAdapter {
 
     @Override

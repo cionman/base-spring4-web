@@ -2,7 +2,6 @@ package com.base.controller;
 
 import com.base.form.AccountCreateForm;
 import com.base.form.ExampleForm;
-import com.base.mappers.mariadb.ExampleMapper;
 import com.base.service.auth.AuthUserDetail;
 import com.base.service.example.ExampleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
+/**
+ * 예제 컨트롤러
+ */
 @Controller
 @RequestMapping("/web/example")
 public class ExampleController {
