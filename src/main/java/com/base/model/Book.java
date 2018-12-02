@@ -1,18 +1,19 @@
 package com.base.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.io.Serializable;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Book {
     private String bookId;
+
+    @NotNull
+    @Size(min = 3)
     private String name;
 
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate publishDate;
 
 

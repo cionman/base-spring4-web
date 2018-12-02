@@ -26,6 +26,8 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
         if (ex instanceof MaxUploadSizeExceededException) {
             model.getModel().put("message", "파일 용량 초과하였습니다.");
         }
+
+        System.out.println("aaaaa :::: =======");
         if("dev".equals(profile)){
             StringWriter stringWriter = new StringWriter();
             ex.printStackTrace(new PrintWriter(stringWriter));

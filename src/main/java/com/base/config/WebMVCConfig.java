@@ -2,6 +2,7 @@ package com.base.config;
 
 import com.base.common.exceptionhandler.CustomExceptionResolver;
 import com.base.common.interceptor.RequestLogInterceptor;
+import com.fasterxml.jackson.databind.util.StdDateFormat;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
@@ -169,7 +170,10 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
     @Bean
     public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter(){
         return new MappingJackson2HttpMessageConverter(
-                Jackson2ObjectMapperBuilder.json().indentOutput(true).build());
+                Jackson2ObjectMapperBuilder.json()
+                        .indentOutput(true)
+                        .dateFormat(new StdDateFormat()) //Json 출력 날짜 포맷 설정, 기본 yyyy-MM-dd, LocalDate 및 LocalDateTime도 가능
+                        .build());
     }
 
     /**
@@ -181,8 +185,5 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
         converters.add(0, mappingJackson2HttpMessageConverter());
     }
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**");
-    }
+
 }
